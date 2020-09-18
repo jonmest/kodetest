@@ -1,17 +1,19 @@
 import IPost from '../interfaces'
-import Layout from '../components/Layout'
-import Pagination from "react-js-pagination"
-import PostSummary from '../components/PostSummary'
+import Layout from '../components/layouts'
 import PostPaginator from '../components/PostPaginator'
-
-const POSTS_PER_PAGE = 10
+import Head from 'next/head'
+import { Fragment } from 'react'
 
 export default function OverviewPosts({ posts }: { posts: Array<IPost>}) {
-
   return (
-    <Layout>
-      <PostPaginator posts={posts}/>
-    </Layout>
+    <Fragment>
+      <Head>
+        <title>Home | Kodetest</title>
+      </Head>
+      <Layout>
+        <PostPaginator posts={posts}/>
+      </Layout>
+    </Fragment>
   )
 }
 

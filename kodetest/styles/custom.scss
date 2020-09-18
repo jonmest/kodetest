@@ -1,11 +1,15 @@
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400");
+
 $theme-colors: (
     "primary": #8b8da7,
-    "danger": #a3415b,
+    "danger": #75667d,
     "secondary": #293353
 );
 
 $card-border-radius: 0;
 $card-border-color: rgb(241, 241, 241);
 $enable-rounded: false;
+$enable-shadows: true;
+$font-family-sans-serif: "Raleway", sans-serif;
 /* import bootstrap to set changes */
 @import "~bootstrap/scss/bootstrap";

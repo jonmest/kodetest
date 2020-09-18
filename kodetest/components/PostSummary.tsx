@@ -1,6 +1,7 @@
 import IPost from '../interfaces'
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
+import Link from 'next/link'
 
 type PostSummaryProps = {
     post: IPost
@@ -12,13 +13,15 @@ export default function PostSummary ({ post }: PostSummaryProps) {
     }
 
     return (
-        <Card className="mb-2">
+        <Card className="mb-2 shadow-sm">
           <Card.Body>
             <Card.Title className="text-secondary">{ toCapitalized(post.title) }</Card.Title>
             <Card.Text>
               { toCapitalized(post.body) }
             </Card.Text>
-            <Button variant="secondary">Read now</Button>
+            <Link href={`/${post.id}`}>
+              <Button variant="secondary">Read</Button>
+            </Link>
           </Card.Body>
         </Card>
     )

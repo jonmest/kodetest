@@ -10,7 +10,8 @@ type IPostSummaryState = {
 }
 
 export default function PostPaginator({ posts }: { posts: Array<IPost>}) {
-  const [state, setState] = useState<IPostSummaryState>(({
+  
+    const [state, setState] = useState<IPostSummaryState>(({
     data: posts.slice(0, POSTS_PER_PAGE),
     activePage: 1
   }))
