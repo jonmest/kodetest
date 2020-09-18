@@ -1,15 +1,20 @@
-import IPost from '../interfaces'
+import { IPost, IUser } from '../interfaces'
 import Pagination from "react-js-pagination"
 import PostSummary from '../components/PostSummary'
 import { useState, Fragment } from 'react'
 const POSTS_PER_PAGE = 10
+
+type PostPaginatorProps = {
+    posts: Array<IPost>;
+    users: Array<IUser>;
+}
 
 type IPostSummaryState = {
     data: Array<IPost>;
     activePage: number;
 }
 
-export default function PostPaginator({ posts }: { posts: Array<IPost>}) {
+export default function PostPaginator({ posts, users }: PostPaginatorProps) {
   
     const [state, setState] = useState<IPostSummaryState>(({
     data: posts.slice(0, POSTS_PER_PAGE),
@@ -57,7 +62,7 @@ export default function PostPaginator({ posts }: { posts: Array<IPost>}) {
         { getPaginationMenu() }
         {
             state.data.map((post: IPost, index: number) => {
-            return <PostSummary key={index} post={post}/>
+            return <PostSummary key={index} post={post} users={users}/>
             })
         }
         { getPaginationMenu() }
