@@ -1,21 +1,24 @@
-import Post from '../interfaces'
+import IPost from '../interfaces'
 import Card from 'react-bootstrap/Card'
+import Button from 'react-bootstrap/Button'
 
 type PostSummaryProps = {
-    post: Post
+    post: IPost
 }
 
 export default function PostSummary ({ post }: PostSummaryProps) {
+    const toCapitalized = (str: string) => {
+      return str.charAt(0).toUpperCase() + str.slice(1)
+    }
+
     return (
         <Card className="mb-2">
           <Card.Body>
-            <Card.Title>{ post.title }</Card.Title>
-            <Card.Subtitle className="mb-2 text-muted">Written by user #{ post.userId }</Card.Subtitle>
+            <Card.Title className="text-secondary">{ toCapitalized(post.title) }</Card.Title>
             <Card.Text>
-              { post.body }
+              { toCapitalized(post.body) }
             </Card.Text>
-            <Card.Link href="#">Card Link</Card.Link>
-            <Card.Link href="#">Another Link</Card.Link>
+            <Button variant="secondary">Read now</Button>
           </Card.Body>
         </Card>
     )

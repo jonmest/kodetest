@@ -1,4 +1,4 @@
-export default interface Post {
+export default interface IPost {
     title: string;
     body: string;
     userId: number;

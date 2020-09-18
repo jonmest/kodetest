@@ -1,30 +1,31 @@
-import Post from '../interfaces'
-import Layout from '../components/Layout'
+import IPost from '../interfaces'
 import Pagination from "react-js-pagination"
 import PostSummary from '../components/PostSummary'
 import { useState, Fragment } from 'react'
 const POSTS_PER_PAGE = 10
 
-export default function PostPaginator({ posts }: { posts: Array<Post>}) {
-  
-  const [state, setState] = useState(({
+type IPostSummaryState = {
+    data: Array<IPost>;
+    activePage: number;
+}
+
+export default function PostPaginator({ posts }: { posts: Array<IPost>}) {
+  const [state, setState] = useState<IPostSummaryState>(({
     data: posts.slice(0, POSTS_PER_PAGE),
     activePage: 1
   }))
 
+  const handlePageChange = (pageNumber: number) => {
+    const startIndex = (pageNumber - 1) * POSTS_PER_PAGE
+    const endIndex = startIndex + POSTS_PER_PAGE
+    let items: Array<IPost>
 
-  const handlePageChange = pageNumber => {
-    const startIndex = (pageNumber - 1) * POSTS_PER_PAGE // page 1: 0, page 2: 10
-    const endIndex = startIndex + POSTS_PER_PAGE // page 1: 9, page 2: 20
-    let items
-
+    // If we're at the last page
     if (endIndex > posts.length) {
       items = posts.slice(startIndex)
     } else {
       items = posts.slice(startIndex, endIndex)
     }
-
-    console.log(items)
 
     setState({
       ...state,
@@ -33,46 +34,32 @@ export default function PostPaginator({ posts }: { posts: Array<Post>}) {
     })
   }
 
+  // We want pagination on top and bottom
+  // so using this function for DRY
+  const getPaginationMenu = () => {
+    return <nav>
+                <Pagination
+                activePage={state.activePage}
+                itemsCountPerPage={POSTS_PER_PAGE}
+                totalItemsCount={posts.length}
+                pageRangeDisplayed={10}
+                onChange={handlePageChange.bind(this)}
+                itemClass="page-item"
+                linkClass="page-link"
+                innerClass="pagination justify-content-center"
+                />
+            </nav>
+  }
+
   return (
     <Fragment>
-            <nav><Pagination
-          activePage={state.activePage}
-          itemsCountPerPage={POSTS_PER_PAGE}
-          totalItemsCount={posts.length}
-          pageRangeDisplayed={10}
-          onChange={handlePageChange.bind(this)}
-          itemClass="page-item"
-          linkClass="page-link"
-          innerClass="pagination justify-content-center"
-        /></nav>
-      {
-        state.data.map((post: Post, index: number) => {
-          return <PostSummary key={index} post={post}/>
-        })
-      }
-
-<nav><Pagination
-          activePage={state.activePage}
-          itemsCountPerPage={POSTS_PER_PAGE}
-          totalItemsCount={posts.length}
-          pageRangeDisplayed={10}
-          onChange={handlePageChange.bind(this)}
-          itemClass="page-item"
-          linkClass="page-link"
-          innerClass="pagination justify-content-center"
-        /></nav>
-      
+        { getPaginationMenu() }
+        {
+            state.data.map((post: IPost, index: number) => {
+            return <PostSummary key={index} post={post}/>
+            })
+        }
+        { getPaginationMenu() }
     </Fragment>
   )
-}
-
-export async function getStaticProps() {
-  const res = await fetch('https://jsonplaceholder.typicode.com/posts/')
-  const posts: Array<Post> = await res.json()
-
-  return {
-    props: {
-      posts,
-    },
-  }
 }
