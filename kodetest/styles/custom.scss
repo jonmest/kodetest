@@ -1,0 +1,8 @@
+$theme-colors: (
+    "info": tomato,
+    "danger": teal
+);
+$card-border-radius: 0;
+$card-border-color: rgb(241, 241, 241);
+/* import bootstrap to set changes */
+@import "~bootstrap/scss/bootstrap";
