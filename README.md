@@ -19,7 +19,12 @@ Other key locations in the repo are:
 The data supplied by the JSONPlaceholder API appears to be infrequently — if ever — updated, when looking at its nice and round number of a 100 posts at the `/posts` endpoint. For this reason, I'm using static generation in Next.js, which means the pages only need to be built once and can be served by a CDN. It's also what [Next.js recommends](https://nextjs.org/docs/basic-features/pages) whenever possible.
 
 ## How to run the application
-### Pre-built
+### Built
+First you need to build the application:
+- `npm install`
+- `npm run build`
+
+When it's done:
 - `npm start`
 
 ### Development version
