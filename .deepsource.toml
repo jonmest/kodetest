@@ -5,8 +5,8 @@ name = "javascript"
 enabled = true
 
   [analyzers.meta]
-  module_system = "commonjs"
-  environment = ["nodejs"]
+  module_system = "es-modules"
   plugins = ["react"]
-  dialect = "typescript"
   style_guide = "airbnb"
+  environment = ["nodejs"]
+  dialect = "typescript"
