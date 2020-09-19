@@ -1,6 +1,6 @@
 # Kodetest
 
-Kodetest is a test project written using Next.js, Typescript and Sass. The data used comes from JSONPlaceholder, a fake REST API for testing and prototyping. For this reason, you don't need to setup a database and API on your own for the prototype. The base URL to JSONPlaceholder can be found in `kodetest/.env`.
+Kodetest is a test project written using Next.js, Typescript and Sass. The data used comes from JSONPlaceholder, a fake REST API for testing and prototyping. For this reason, you don't need to setup a database and API on your own for the prototype. The base URL to JSONPlaceholder can be found in `.env`.
 
 ## Project structure
 The web application has two endpoints:
