@@ -5,12 +5,12 @@ import DefaultLayout from '../components/layouts'
 import { getAllPosts, getAllUsers } from '../lib/api'
 import PostPaginator from '../components/posts/PostPaginator'
 
-type OverviewPostsProps = {
+type IndexProps = {
   posts: Array<IPost>,
   users: Array<IUser>,
 }
 
-export default function OverviewPosts({ posts, users }: OverviewPostsProps) {
+export default function Index({ posts, users }: IndexProps) {
   return (
     <Fragment>
       <Head>

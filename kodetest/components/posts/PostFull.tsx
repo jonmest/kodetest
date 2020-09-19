@@ -1,5 +1,6 @@
-import { IPost, IUser, IComment } from '../../interfaces'
 import { Fragment } from 'react'
+import { toCapitalized } from '../../lib/util'
+import { IPost, IUser } from '../../interfaces'
 
 type PostFullProps = {
     post: IPost,
@@ -7,10 +8,6 @@ type PostFullProps = {
 }
 
 export default function PostFull({ post, user }: PostFullProps) {
-    const toCapitalized = (str: string) => {
-        return str.charAt(0).toUpperCase() + str.slice(1)
-    }
-
     return (
         <Fragment>
             <h1>
@@ -20,10 +17,9 @@ export default function PostFull({ post, user }: PostFullProps) {
                 By {user.name}
             </p>
             <hr />
-            <p>
+            <p className="article">
                 {toCapitalized(post.body)}
             </p>
-
         </Fragment>
     )
 }

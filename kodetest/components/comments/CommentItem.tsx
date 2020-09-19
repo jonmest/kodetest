@@ -1,6 +1,6 @@
-import { IComment } from '../../interfaces'
 import { Fragment } from 'react'
 import Card from 'react-bootstrap/Card'
+import { IComment } from '../../interfaces'
 
 type CommentItemProps = {
   comment: IComment,

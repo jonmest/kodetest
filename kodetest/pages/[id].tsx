@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import { Fragment } from 'react'
+import { toCapitalized } from '../lib/util'
 import DefaultLayout from '../components/layouts'
 import PostFull from '../components/posts/PostFull'
 import { IPost, IUser, IComment } from '../interfaces'
@@ -9,14 +10,16 @@ import { getPost, getUser, getComments, getAllPosts } from '../lib/api'
 type DetailedPostProps = {
     post: IPost,
     user: IUser,
-    comments: Array<IComment>
+    comments: Array<IComment>,
 }
 
 export default function DetailedPost({ post, user, comments }: DetailedPostProps) {
     return (
         <Fragment>
             <Head>
-                <title>{post.title}</title>
+                <title>
+                    {toCapitalized(post.title)}
+                </title>
             </Head>
             <DefaultLayout>
                 <PostFull post={post} user={user} />

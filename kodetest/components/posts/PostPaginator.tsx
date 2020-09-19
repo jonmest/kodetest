@@ -4,9 +4,9 @@ import Pagination from "react-js-pagination"
 import { IPost, IUser } from '../../interfaces'
 
 type PostPaginatorProps = {
-  posts: Array<IPost>;
-  users: Array<IUser>;
-  postsPerPage: number;
+  posts: Array<IPost>,
+  users: Array<IUser>,
+  postsPerPage: number,
 }
 
 type IPostSummaryState = {
@@ -15,11 +15,13 @@ type IPostSummaryState = {
 }
 
 export default function PostPaginator({ posts, users, postsPerPage }: PostPaginatorProps) {
+  // Initialize state with post 1-10
   const [state, setState] = useState<IPostSummaryState>(({
     data: posts.slice(0, postsPerPage),
     activePage: 1
   }))
 
+  // When pagination nav item is clicked
   const handlePageChange = (pageNumber: number) => {
     const startIndex = (pageNumber - 1) * postsPerPage
     const endIndex = startIndex + postsPerPage
@@ -40,7 +42,7 @@ export default function PostPaginator({ posts, users, postsPerPage }: PostPagina
   }
 
   // We want pagination on top and bottom
-  // so using this function for DRY
+  // so using this for conciseness
   const getPaginationMenu = () => {
     return <nav>
       <Pagination
