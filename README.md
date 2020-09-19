@@ -9,7 +9,7 @@ The web application has two endpoints:
 
 Other key locations in the repo are:
 
-- The Next.js pages for beforementioned endpoints can be found in `/pages/[id].tsx` and `kodetest/pages/index.tsx`.
+- The Next.js pages for beforementioned endpoints can be found in `/pages/[id].tsx` and `/pages/index.tsx`.
 - React components are located in the `/components` directory.
 - Typescript interfaces are defined in `/interfaces/index.ts`.
 - Sass files are located at `/styles`.
