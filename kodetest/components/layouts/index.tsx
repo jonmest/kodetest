@@ -3,7 +3,7 @@ import Header from './Header'
 import Footer from './Footer'
 import { Fragment } from 'react'
 
-export default function Layout (props: any) {
+export default function DefaultLayout (props: any) {
     return (
         <Fragment>
             <Header/>

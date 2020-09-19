@@ -1,7 +1,7 @@
-import { IUser, IPost } from '../interfaces'
+import Link from 'next/link'
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
-import Link from 'next/link'
+import { IUser, IPost } from '../../interfaces'
 
 type PostSummaryProps = {
     post: IPost,

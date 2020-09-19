@@ -1,4 +1,4 @@
-export default function Footer (props: any) {
+export default function Footer () {
     return (
         <footer className="site-footer mt-5 p-5 bg-secondary text-light">
             <div className="container">

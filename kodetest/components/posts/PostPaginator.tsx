@@ -1,12 +1,12 @@
-import { IPost, IUser } from '../interfaces'
-import Pagination from "react-js-pagination"
-import PostSummary from '../components/PostSummary'
+import PostSummary from './PostSummary'
 import { useState, Fragment } from 'react'
-const POSTS_PER_PAGE = 10
+import Pagination from "react-js-pagination"
+import { IPost, IUser } from '../../interfaces'
 
 type PostPaginatorProps = {
     posts: Array<IPost>;
     users: Array<IUser>;
+    postsPerPage: number;
 }
 
 type IPostSummaryState = {
@@ -14,16 +14,16 @@ type IPostSummaryState = {
     activePage: number;
 }
 
-export default function PostPaginator({ posts, users }: PostPaginatorProps) {
+export default function PostPaginator({ posts, users, postsPerPage }: PostPaginatorProps) {
   
     const [state, setState] = useState<IPostSummaryState>(({
-    data: posts.slice(0, POSTS_PER_PAGE),
+    data: posts.slice(0, postsPerPage),
     activePage: 1
   }))
 
   const handlePageChange = (pageNumber: number) => {
-    const startIndex = (pageNumber - 1) * POSTS_PER_PAGE
-    const endIndex = startIndex + POSTS_PER_PAGE
+    const startIndex = (pageNumber - 1) * postsPerPage
+    const endIndex = startIndex + postsPerPage
     let items: Array<IPost>
 
     // If we're at the last page
@@ -46,7 +46,7 @@ export default function PostPaginator({ posts, users }: PostPaginatorProps) {
     return <nav>
                 <Pagination
                 activePage={state.activePage}
-                itemsCountPerPage={POSTS_PER_PAGE}
+                itemsCountPerPage={postsPerPage}
                 totalItemsCount={posts.length}
                 pageRangeDisplayed={10}
                 onChange={handlePageChange.bind(this)}

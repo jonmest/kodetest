@@ -1,5 +1,9 @@
+import Head from 'next/head'
+import { Fragment } from 'react'
+import DefaultLayout from '../components/layouts'
+import PostFull from '../components/posts/PostFull'
 import { IPost, IUser, IComment } from '../interfaces'
-import Layout from '../components/layouts'
+import CommentList from '../components/comments/CommendList'
 
 type DetailedPostProps = {
     post: IPost,
@@ -8,45 +12,33 @@ type DetailedPostProps = {
 }
 
 export default function DetailedPost({ post, user, comments }: DetailedPostProps) {
-    const toCapitalized = (str: string) => {
-        return str.charAt(0).toUpperCase() + str.slice(1)
-      }
-
-      console.log(comments)
     return (
-        <Layout>
-            <h1>
-                { toCapitalized(post.title) }
-            </h1>
-            <hr/>
-            <p>
-                Written by { user.name }
-            </p>
-            <hr/>
-            <p>
-                { toCapitalized(post.body)}
-            </p>
-
-            <ul>
-                {
-                    comments.map((c: IComment) => {
-                        return <li>{c.body}</li>
-                    })
-                }
-            </ul>
-        </Layout>
+        <Fragment>
+            <Head>
+                <title>{ post.title }</title>
+            </Head>
+            <DefaultLayout>
+                <PostFull post={post} user={user}/>
+                <hr/>
+                <h3>
+                    Comments:
+                </h3>
+                <CommentList comments={comments}/>
+            </DefaultLayout>
+        </Fragment>
     )
 }
 
 export async function getStaticProps({ params }) {
-    const postRes = await fetch(`https://jsonplaceholder.typicode.com/posts/${params.id}`)
-    const post: IPost = await postRes.json()
+    const post: IPost = await fetch(`https://jsonplaceholder.typicode.com/posts/${params.id}`)
+                                .then(res => res.json())
 
-    const userRes = await fetch(`https://jsonplaceholder.typicode.com/users/?id=${post.userId}`)
-    const user: IUser = await userRes.json().then(list => list[0])
-
-    const commentsRes = await fetch(`https://jsonplaceholder.typicode.com/posts/${params.id}/comments`)
-    const comments: Array<IComment> = await commentsRes.json()
+    const user: IUser = await fetch(`https://jsonplaceholder.typicode.com/users/?id=${post.userId}`)
+                                .then(res => res.json())
+                                .then(list => list[0])
+    
+    const comments: Array<IComment> = await fetch(`https://jsonplaceholder.typicode.com/posts/${params.id}/comments`)
+                                            .then(res => res.json())
 
     return {
         props: {
@@ -56,10 +48,9 @@ export async function getStaticProps({ params }) {
 }
 
 export async function getStaticPaths() {
-    const res = await fetch('https://jsonplaceholder.typicode.com/posts/')
-    const posts: Array<IPost> = await res.json()
-    
+    const posts: Array<IPost> = await fetch('https://jsonplaceholder.typicode.com/posts/')
+                                        .then(res => res.json())
+                                        
     const paths = posts.map(post => `/${post.id}`)
-
     return { paths, fallback: false }
   }
