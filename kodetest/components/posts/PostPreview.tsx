@@ -3,12 +3,12 @@ import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
 import { IUser, IPost } from '../../interfaces'
 
-type PostSummaryProps = {
+type PostPreviewProps = {
     post: IPost,
     users: Array<IUser>
 }
 
-export default function PostSummary ({ post, users }: PostSummaryProps) {
+export default function PostPreview ({ post, users }: PostPreviewProps) {
     const toCapitalized = (str: string) => {
       return str.charAt(0).toUpperCase() + str.slice(1)
     }

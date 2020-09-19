@@ -3,6 +3,7 @@ import { Fragment } from 'react'
 import { IPost, IUser } from '../interfaces'
 import DefaultLayout from '../components/layouts'
 import PostPaginator from '../components/posts/PostPaginator'
+import { getAllPosts, getAllUsers } from '../lib/api'
 
 type OverviewPostsProps = {
   posts: Array<IPost>,
@@ -25,12 +26,9 @@ export default function OverviewPosts({ posts, users }: OverviewPostsProps) {
 }
 
 export async function getStaticProps() {
-  const posts: Array<IPost> = await fetch('https://jsonplaceholder.typicode.com/posts/')
-                                    .then(res => res.json())
-  
+  const posts: Array<IPost> = await getAllPosts()
   // We want the users, so we can get the name of a post's author
-  const users: Array<IUser> = await fetch('https://jsonplaceholder.typicode.com/users/')
-                                    .then(res => res.json())
+  const users: Array<IUser> = await getAllUsers()
 
   return {
     props: {

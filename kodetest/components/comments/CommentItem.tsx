@@ -1,5 +1,4 @@
-import { IPost, IUser, IComment } from '../../interfaces'
-import DefaultLayout from '../layouts'
+import { IComment } from '../../interfaces'
 import { Fragment } from 'react'
 import Card from 'react-bootstrap/Card'
 

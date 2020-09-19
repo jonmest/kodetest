@@ -4,6 +4,7 @@ import DefaultLayout from '../components/layouts'
 import PostFull from '../components/posts/PostFull'
 import { IPost, IUser, IComment } from '../interfaces'
 import CommentList from '../components/comments/CommendList'
+import { getPost, getUser, getComments, getAllPosts } from '../lib/api'
 
 type DetailedPostProps = {
     post: IPost,
@@ -30,27 +31,19 @@ export default function DetailedPost({ post, user, comments }: DetailedPostProps
 }
 
 export async function getStaticProps({ params }) {
-    const post: IPost = await fetch(`https://jsonplaceholder.typicode.com/posts/${params.id}`)
-                                .then(res => res.json())
-
-    const user: IUser = await fetch(`https://jsonplaceholder.typicode.com/users/?id=${post.userId}`)
-                                .then(res => res.json())
-                                .then(list => list[0])
-    
-    const comments: Array<IComment> = await fetch(`https://jsonplaceholder.typicode.com/posts/${params.id}/comments`)
-                                            .then(res => res.json())
+    const post: IPost = await getPost(params.id)
+    const user: IUser = await getUser(post.userId)
+    const comments: Array<IComment> = await getComments(post.id)
 
     return {
         props: {
-        post, user, comments
+            post, user, comments
         },
     }
 }
 
 export async function getStaticPaths() {
-    const posts: Array<IPost> = await fetch('https://jsonplaceholder.typicode.com/posts/')
-                                        .then(res => res.json())
-                                        
+    const posts: Array<IPost> = await getAllPosts()
     const paths = posts.map(post => `/${post.id}`)
     return { paths, fallback: false }
   }

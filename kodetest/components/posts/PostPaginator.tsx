@@ -1,4 +1,4 @@
-import PostSummary from './PostSummary'
+import PostPreview from './PostPreview'
 import { useState, Fragment } from 'react'
 import Pagination from "react-js-pagination"
 import { IPost, IUser } from '../../interfaces'
@@ -62,7 +62,7 @@ export default function PostPaginator({ posts, users, postsPerPage }: PostPagina
         { getPaginationMenu() }
         {
             state.data.map((post: IPost, index: number) => {
-            return <PostSummary key={index} post={post} users={users}/>
+            return <PostPreview key={index} post={post} users={users}/>
             })
         }
         { getPaginationMenu() }

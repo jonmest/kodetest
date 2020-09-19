@@ -5,7 +5,6 @@ export interface IPost {
     id: number;
 }
 
-// Only the necessary
 export interface IUser {
     id: number;
     name: string;
