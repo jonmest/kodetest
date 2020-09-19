@@ -2,8 +2,8 @@ import Head from 'next/head'
 import { Fragment } from 'react'
 import { IPost, IUser } from '../interfaces'
 import DefaultLayout from '../components/layouts'
-import PostPaginator from '../components/posts/PostPaginator'
 import { getAllPosts, getAllUsers } from '../lib/api'
+import PostPaginator from '../components/posts/PostPaginator'
 
 type OverviewPostsProps = {
   posts: Array<IPost>,
@@ -19,7 +19,7 @@ export default function OverviewPosts({ posts, users }: OverviewPostsProps) {
         </title>
       </Head>
       <DefaultLayout>
-        <PostPaginator posts={posts} postsPerPage={10} users={users}/>
+        <PostPaginator posts={posts} postsPerPage={10} users={users} />
       </DefaultLayout>
     </Fragment>
   )

@@ -11,7 +11,7 @@ export default function CommentList({ comments }: PostFullProps) {
         <Fragment>
             {
                 comments.map((comment: IComment, index: number) => {
-                    return <CommentItem comment={comment} key={index}/>
+                    return <CommentItem comment={comment} key={index} />
                 })
             }
         </Fragment>

@@ -3,14 +3,14 @@ import Header from './Header'
 import Footer from './Footer'
 import { Fragment } from 'react'
 
-export default function DefaultLayout (props: any) {
+export default function DefaultLayout(props: any) {
     return (
         <Fragment>
-            <Header/>
+            <Header />
             <Container>
-                { props.children }
+                {props.children}
             </Container>
-            <Footer/>
+            <Footer />
         </Fragment>
     )
 }

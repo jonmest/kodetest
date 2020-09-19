@@ -4,19 +4,18 @@ import Pagination from "react-js-pagination"
 import { IPost, IUser } from '../../interfaces'
 
 type PostPaginatorProps = {
-    posts: Array<IPost>;
-    users: Array<IUser>;
-    postsPerPage: number;
+  posts: Array<IPost>;
+  users: Array<IUser>;
+  postsPerPage: number;
 }
 
 type IPostSummaryState = {
-    data: Array<IPost>;
-    activePage: number;
+  data: Array<IPost>;
+  activePage: number;
 }
 
 export default function PostPaginator({ posts, users, postsPerPage }: PostPaginatorProps) {
-  
-    const [state, setState] = useState<IPostSummaryState>(({
+  const [state, setState] = useState<IPostSummaryState>(({
     data: posts.slice(0, postsPerPage),
     activePage: 1
   }))
@@ -44,28 +43,28 @@ export default function PostPaginator({ posts, users, postsPerPage }: PostPagina
   // so using this function for DRY
   const getPaginationMenu = () => {
     return <nav>
-                <Pagination
-                activePage={state.activePage}
-                itemsCountPerPage={postsPerPage}
-                totalItemsCount={posts.length}
-                pageRangeDisplayed={10}
-                onChange={handlePageChange.bind(this)}
-                itemClass="page-item"
-                linkClass="page-link"
-                innerClass="pagination justify-content-center"
-                />
-            </nav>
+      <Pagination
+        activePage={state.activePage}
+        itemsCountPerPage={postsPerPage}
+        totalItemsCount={posts.length}
+        pageRangeDisplayed={10}
+        onChange={handlePageChange.bind(this)}
+        itemClass="page-item"
+        linkClass="page-link"
+        innerClass="pagination justify-content-center"
+      />
+    </nav>
   }
 
   return (
     <Fragment>
-        { getPaginationMenu() }
-        {
-            state.data.map((post: IPost, index: number) => {
-            return <PostPreview key={index} post={post} users={users}/>
-            })
-        }
-        { getPaginationMenu() }
+      {getPaginationMenu()}
+      {
+        state.data.map((post: IPost, index: number) => {
+          return <PostPreview key={index} post={post} users={users} />
+        })
+      }
+      {getPaginationMenu()}
     </Fragment>
   )
 }

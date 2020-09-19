@@ -16,15 +16,15 @@ export default function DetailedPost({ post, user, comments }: DetailedPostProps
     return (
         <Fragment>
             <Head>
-                <title>{ post.title }</title>
+                <title>{post.title}</title>
             </Head>
             <DefaultLayout>
-                <PostFull post={post} user={user}/>
-                <hr/>
+                <PostFull post={post} user={user} />
+                <hr />
                 <h3>
                     Comments:
                 </h3>
-                <CommentList comments={comments}/>
+                <CommentList comments={comments} />
             </DefaultLayout>
         </Fragment>
     )
@@ -46,4 +46,4 @@ export async function getStaticPaths() {
     const posts: Array<IPost> = await getAllPosts()
     const paths = posts.map(post => `/${post.id}`)
     return { paths, fallback: false }
-  }
+}

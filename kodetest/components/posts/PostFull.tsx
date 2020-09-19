@@ -9,19 +9,19 @@ type PostFullProps = {
 export default function PostFull({ post, user }: PostFullProps) {
     const toCapitalized = (str: string) => {
         return str.charAt(0).toUpperCase() + str.slice(1)
-      }
+    }
 
     return (
         <Fragment>
             <h1>
-                { toCapitalized(post.title) }
+                {toCapitalized(post.title)}
             </h1>
             <p className="lead">
-                By { user.name }
+                By {user.name}
             </p>
-            <hr/>
+            <hr />
             <p>
-                { toCapitalized(post.body)}
+                {toCapitalized(post.body)}
             </p>
 
         </Fragment>
